@@ -1,0 +1,341 @@
+﻿<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FINTASKO</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"></link>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <header class="bg-blue-600 text-white p-4">
+        <div class="container mx-auto flex justify-between items-center">
+            <div class="flex items-center">
+                <h1 class="text-2xl font-bold">FINTASKO</h1>
+            </div>
+            <nav>
+                <ul class="flex space-x-4">
+                    <li><a href="#" class="hover:underline" onclick="showSection('home')">Home</a></li>
+                    <li><a href="#" class="hover:underline" onclick="showSection('dashboard')">Dashboard</a></li>
+                    <li><a href="#" class="hover:underline" onclick="showSection('tasks')">Tasks</a></li>
+                    <li><a href="#" class="hover:underline" onclick="showSection('finance')">Finance</a></li>
+                    <li><a href="#" class="hover:underline" onclick="showSection('reports')">Reports</a></li>
+                    <li><a href="#" class="hover:underline" onclick="showSection('settings')">Settings</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container mx-auto mt-8">
+        <section id="home" class="mb-8">
+            <h2 class="text-xl font-bold mb-4">Welcome to FINTASKO</h2>
+            <p class="bg-powderBlue p-4 rounded shadow">MASTER YOUR TIME, OWN YOUR MONEY</p>
+            <div class="bg-white p-4 rounded shadow mt-4">
+                <h3 class="text-lg font-bold mb-2">Register</h3>
+                <form id="register-form" class="mb-4">
+                    <input type="text" id="register-name" class="border p-2 w-full mb-2" placeholder="Enter your name">
+                    <input type="email" id="register-email" class="border p-2 w-full mb-2" placeholder="Enter your email">
+                    <input type="password" id="register-password" class="border p-2 w-full mb-2" placeholder="Enter your password">
+                    <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Register</button>
+                </form>
+                <h3 class="text-lg font-bold mb-2">Login</h3>
+                <form id="login-form">
+                    <input type="email" id="login-email" class="border p-2 w-full mb-2" placeholder="Enter your email">
+                    <input type="password" id="login-password" class="border p-2 w-full mb-2" placeholder="Enter your password">
+                    <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Login</button>
+                </form>
+            </div>
+        </section>
+
+        <section id="dashboard" class="mb-8 hidden">
+            <h2 class="text-xl font-bold mb-4">Dashboard</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div class="bg-white p-4 rounded shadow">
+                    <h3 class="text-lg font-bold mb-2">Total Tasks</h3>
+                    <p class="text-2xl" id="total-tasks">0</p>
+                </div>
+                <div class="bg-white p-4 rounded shadow">
+                    <h3 class="text-lg font-bold mb-2">Completed Tasks</h3>
+                    <p class="text-2xl" id="completed-tasks">0</p>
+                </div>
+                <div class="bg-white p-4 rounded shadow">
+                    <h3 class="text-lg font-bold mb-2">Pending Tasks</h3>
+                    <p class="text-2xl" id="pending-tasks">0</p>
+                </div>
+                <div class="bg-white p-4 rounded shadow">
+                    <h3 class="text-lg font-bold mb-2">Total Income</h3>
+                    <p class="text-2xl" id="total-income">R0</p>
+                </div>
+                <div class="bg-white p-4 rounded shadow">
+                    <h3 class="text-lg font-bold mb-2">Total Expense</h3>
+                    <p class="text-2xl" id="total-expense">R0</p>
+                </div>
+                <div class="bg-white p-4 rounded shadow">
+                    <h3 class="text-lg font-bold mb-2">Net Savings</h3>
+                    <p class="text-2xl" id="net-savings">R0</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="tasks" class="mb-8 hidden">
+            <h2 class="text-xl font-bold mb-4">Tasks</h2>
+            <div class="bg-white p-4 rounded shadow">
+                <form id="task-form" class="mb-4">
+                    <input type="text" id="task-input" class="border p-2 w-full mb-2" placeholder="Enter new task">
+                    <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Add Task</button>
+                </form>
+                <ul id="task-list">
+                    <li class="flex justify-between items-center mb-2">
+                        <span>   </span>
+                        <div>
+                            <button class="bg-green-500 text-white px-2 py-1 rounded complete-btn">Complete</button>
+                            <button class="bg-red-500 text-white px-2 py-1 rounded delete-btn">Delete</button>
+                        </div>
+                    </li>
+                    <li class="flex justify-between items-center mb-2">
+                        <span>    </span>
+                        <div>
+                            <button class="bg-green-500 text-white px-2 py-1 rounded complete-btn">Complete</button>
+                            <button class="bg-red-500 text-white px-2 py-1 rounded delete-btn">Delete</button>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="finance" class="mb-8 hidden">
+            <h2 class="text-xl font-bold mb-4">Finance</h2>
+            <div class="bg-white p-4 rounded shadow">
+                <form id="finance-form" class="mb-4">
+                    <input type="text" id="finance-description" class="border p-2 w-full mb-2" placeholder="Enter description">
+                    <input type="number" id="finance-amount" class="border p-2 w-full mb-2" placeholder="Enter amount">
+                    <select id="finance-type" class="border p-2 w-full mb-2">
+                        <option value="income">Income</option>
+                        <option value="expense">Expense</option>
+                    </select>
+                    <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Add Entry</button>
+                </form>
+                <ul id="finance-list">
+                    <li class="flex justify-between items-center mb-2">
+                        <span>Income: R   </span>
+                        <div>
+                            <button class="bg-yellow-500 text-white px-2 py-1 rounded edit-btn">Edit</button>
+                            <button class="bg-red-500 text-white px-2 py-1 rounded delete-btn">Delete</button>
+                            <button class="bg-green-500 text-white px-2 py-1 rounded paid-btn">Paid</button>
+                        </div>
+                    </li>
+                    <li class="flex justify-between items-center mb-2">
+                        <span>Expense: R    </span>
+                        <div>
+                            <button class="bg-yellow-500 text-white px-2 py-1 rounded edit-btn">Edit</button>
+                            <button class="bg-red-500 text-white px-2 py-1 rounded delete-btn">Delete</button>
+                            <button class="bg-green-500 text-white px-2 py-1 rounded paid-btn">Paid</button>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="reports" class="mb-8 hidden">
+            <h2 class="text-xl font-bold mb-4">Reports</h2>
+            <div class="bg-white p-4 rounded shadow">
+                <ul>
+                    <li class="flex justify-between items-center mb-2">
+                        <span>Monthly Report</span>
+                        <button class="bg-blue-500 text-white px-2 py-1 rounded" onclick="generateMonthlyReport()">View</button>
+                    </li>
+                    <li class="flex justify-between items-center mb-2">
+                        <span>Quarterly Report</span>
+                        <button class="bg-blue-500 text-white px-2 py-1 rounded">View</button>
+                    </li>
+                    <li class="flex justify-between items-center mb-2">
+                        <span>Annual Report</span>
+                        <button class="bg-blue-500 text-white px-2 py-1 rounded">View</button>
+                    </li>
+                </ul>
+                <canvas id="monthlyReportChart" class="mt-4"></canvas>
+            </div>
+        </section>
+
+        <section id="settings" class="mb-8 hidden">
+            <h2 class="text-xl font-bold mb-4">Settings</h2>
+            <div class="bg-white p-4 rounded shadow">
+                <form id="profile-form" class="mb-4">
+                    <input type="text" id="profile-name" class="border p-2 w-full mb-2" placeholder="Enter your name">
+                    <input type="email" id="profile-email" class="border p-2 w-full mb-2" placeholder="Enter your email">
+                    <button type="submit" class="bg-yellow-500 text-white px-4 py-2 rounded">Save Profile</button>
+                </form>
+                <ul>
+                    <li class="flex justify-between items-center mb-2">
+                        <span>Profile Settings</span>
+                        <button class="bg-yellow-500 text-white px-2 py-1 rounded">Edit</button>
+                    </li>
+                    <section id="account-settings" class="mb-8 hidden">
+                        <h2 class="text-xl font-bold mb-4">Account Settings</h2>
+                        <div class="bg-white p-4 rounded shadow">
+                            <form id="account-settings-form" class="mb-4">
+                                <input type="text" id="account-username" class="border p-2 w-full mb-2" placeholder="Enter your username">
+                                <input type="password" id="account-password" class="border p-2 w-full mb-2" placeholder="Enter your password">
+                                <button type="submit" class="bg-yellow-500 text-white px-4 py-2 rounded">Save Account Settings</button>
+                            </form>
+                        </div>
+                    </section>
+                    <li class="flex justify-between items-center mb-2">
+                        <span>Account Settings</span>
+                        <button class="bg-yellow-500 text-white px-2 py-1 rounded">Edit</button>
+                    </li>
+                    <li class="flex justify-between items-center mb-2">
+                        <span>Notification Settings</span>
+                        <button class="bg-yellow-500 text-white px-2 py-1 rounded">Edit</button>
+                    </li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-gray-800 text-white p-4 mt-8">
+        <div class="container mx-auto text-center">
+           
+        </div>
+    </footer>
+
+    <script>
+        function showSection(sectionId) {
+            const sections = document.querySelectorAll('main > section');
+            sections.forEach(section => {
+                if (section.id === sectionId) {
+                    section.classList.remove('hidden');
+                } else {
+                    section.classList.add('hidden');
+                }
+            });
+        }
+
+        document.getElementById('task-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const taskInput = document.getElementById('task-input');
+            const taskList = document.getElementById('task-list');
+            const newTask = document.createElement('li');
+            newTask.classList.add('flex', 'justify-between', 'items-center', 'mb-2');
+            newTask.innerHTML = `<span>${taskInput.value}</span>
+                                     <div>
+                                         <button class="bg-green-500 text-white px-2 py-1 rounded complete-btn">Complete</button>
+                                         <button class="bg-red-500 text-white px-2 py-1 rounded delete-btn">Delete</button>
+                                     </div>`;
+            taskList.appendChild(newTask);
+            taskInput.value = '';
+        });
+
+        document.getElementById('task-list').addEventListener('click', function (e) {
+            if (e.target.classList.contains('complete-btn')) {
+                const taskItem = e.target.parentElement.parentElement;
+                taskItem.querySelector('span').classList.toggle('line-through');
+                e.target.textContent = e.target.textContent === 'Complete' ? 'Incomplete' : 'Complete';
+            } else if (e.target.classList.contains('delete-btn')) {
+                const taskItem = e.target.parentElement.parentElement;
+                taskItem.remove();
+            }
+        });
+
+        document.getElementById('finance-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const description = document.getElementById('finance-description').value;
+            const amount = document.getElementById('finance-amount').value;
+            const type = document.getElementById('finance-type').value;
+            const financeList = document.getElementById('finance-list');
+            const newEntry = document.createElement('li');
+            newEntry.classList.add('flex', 'justify-between', 'items-center', 'mb-2');
+            newEntry.innerHTML = `<span>${type.charAt(0).toUpperCase() + type.slice(1)}: R${amount}</span>
+                                      <div>
+                                          <button class="bg-yellow-500 text-white px-2 py-1 rounded edit-btn">Edit</button>
+                                          <button class="bg-red-500 text-white px-2 py-1 rounded delete-btn">Delete</button>
+                                          <button class="bg-green-500 text-white px-2 py-1 rounded paid-btn">Paid</button>
+                                      </div>`;
+            financeList.appendChild(newEntry);
+            document.getElementById('finance-description').value = '';
+            document.getElementById('finance-amount').value = '';
+        });
+
+        document.getElementById('finance-list').addEventListener('click', function (e) {
+            if (e.target.classList.contains('edit-btn')) {
+                const financeItem = e.target.parentElement.parentElement;
+                const description = prompt("Enter new description:", financeItem.querySelector('span').textContent.split(':')[0]);
+                const amount = prompt("Enter new amount:", financeItem.querySelector('span').textContent.split('R')[1]);
+                if (description && amount) {
+                    financeItem.querySelector('span').textContent = `${description}: R${amount}`;
+                }
+            } else if (e.target.classList.contains('delete-btn')) {
+                const financeItem = e.target.parentElement.parentElement;
+                financeItem.remove();
+            } else if (e.target.classList.contains('paid-btn')) {
+                const financeItem = e.target.parentElement.parentElement;
+                financeItem.querySelector('span').classList.toggle('line-through');
+                e.target.textContent = e.target.textContent === 'Paid' ? 'Unpaid' : 'Paid';
+            }
+        });
+
+        document.getElementById('profile-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const name = document.getElementById('profile-name').value;
+            const email = document.getElementById('profile-email').value;
+            alert(`Profile updated: Name - ${name}, Email - ${email}`);
+        });
+
+        function generateMonthlyReport() {
+            const ctx = document.getElementById('monthlyReportChart').getContext('2d');
+            const data = {
+                labels: ['Income', 'Expense'],
+                datasets: [{
+                    label: 'Monthly Report',
+                    data: [25, 40], // Example data, replace with actual data
+                    backgroundColor: ['#4CAF50', '#F44336'],
+                }]
+            };
+
+            const config = {
+                type: 'pie',
+                data: data,
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        },
+                        title: {
+                            display: true,
+                            text: 'Monthly Financial Report'
+                        }
+                    }
+                },
+            };
+            new Chart(ctx, config);
+        }
+
+        document.getElementById('register-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const name = document.getElementById('register-name').value;
+            const email = document.getElementById('register-email').value;
+            const password = document.getElementById('register-password').value;
+            alert(`Registered: Name - ${name}, Email - ${email}`);
+        });
+
+        document.getElementById('login-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-password').value;
+            alert(`Logged in: Email - ${email}`);
+        });
+
+    </script>
+</body>
+</html>
